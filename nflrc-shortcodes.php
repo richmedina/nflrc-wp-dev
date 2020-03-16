@@ -104,7 +104,7 @@ function nflrc_project_block_func($atts, $content = null) {
 	    	$data = read_nflrc_fields($post);
 	    	$output .= "<article class='grid_block'>";
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
-	    	$output .= "<div>{$data['title']}</div>";
+	    	$output .= "<div class='block_title'>{$data['title']}</div>";
 	    	$output .= "<div>{$data['excerpt']}</div>";
 	    	$output .= "<div>{$data['post_type']}</div>";
 	    	$output .= "</article>";
