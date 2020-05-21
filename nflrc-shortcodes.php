@@ -81,11 +81,11 @@ function nflrc_feature_list_func($atts, $content = null) {
 //[nflrc_project_block]
 /* Displays all post types flagged as featured ordered by featured rank.
 */
-add_shortcode( 'nflrc_project_block', 'nflrc_project_block_func' );
-function nflrc_project_block_func($atts, $content = null) {
+add_shortcode( 'nflrc_post_block', 'nflrc_post_block_func' );
+function nflrc_post_block_func($atts, $content = null) {
 	$a = shortcode_atts( array(
 		'post_slug' => '',
-		'cls_str' => '',
+		'cls_str' => 'horizontal',
 	), $atts );
 	
 	$slug = sanitize_text_field($a['post_slug']);
@@ -101,18 +101,20 @@ function nflrc_project_block_func($atts, $content = null) {
 	    while ( $posts->have_posts() ) {
 	    	$posts->the_post();
 	    	$data = read_nflrc_fields($post);
-	    	$output .= "<article class='listing-item'>";
+	    	$output .= "<article class='grid_block {$a['cls_str']}'>";
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
-	    	$output .= "<div class='block_title'>{$data['title']}</div>";
-	    	$output .= "<div>{$data['excerpt']}</div>";
-	    	$output .= "<div>{$data['post_type']}</div>";
+	    	$output .= "<div class='card'>";
+	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
+	    	$output .= "<div class='block_body'>{$data['excerpt']}</div>";
+	    	$output .= "<div class='block_footer'>{$data['post_type']}</div>";
+	    	$output .= "</div>";
 	    	$output .= "</article>";
 	    }
-	    wp_reset_postdata();  
+	    // wp_reset_postdata();  
 	} else {
 	    $output .= "<div>No matching posts.</div>";	}
 
-	
+	wp_reset_postdata();
 	
 	return $output;	
 }
