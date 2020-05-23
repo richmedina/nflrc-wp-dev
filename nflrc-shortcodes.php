@@ -80,6 +80,10 @@ function nflrc_feature_list_func($atts, $content = null) {
 
 //[nflrc_project_block]
 /* Displays all post types flagged as featured ordered by featured rank.
+Attributes: 
+post_slug - slug of item to display in the block
+cls_str - horizontal (default) or vertical layout
+Example: [nflrc_post_block post_slug="issues-in-placement" cls_str="vertical"]
 */
 add_shortcode( 'nflrc_post_block', 'nflrc_post_block_func' );
 function nflrc_post_block_func($atts, $content = null) {
@@ -112,7 +116,7 @@ function nflrc_post_block_func($atts, $content = null) {
 	    }
 	    // wp_reset_postdata();  
 	} else {
-	    $output .= "<div>No matching posts.</div>";	}
+	    $output .= "<div>Content not found.</div>";	}
 
 	wp_reset_postdata();
 	

@@ -37,6 +37,20 @@ body {
     margin-top: 1em;
 }
 
+/*#et-top-navigation {
+    float: left;
+}
+*/
+/*#top-menu li {
+    display: inline-block;
+    font-size: 14px;
+    padding: 15px 0px 10px 0px;
+    background-color: rgb(255, 222, 0);
+    text-align: center;
+    height: 40px;
+    width: 100px;
+}*/
+
 @media (min-width: 1024px) {
     .grid_wrap {
         grid-template-columns: repeat(auto-fill, 240px );
