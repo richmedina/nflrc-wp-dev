@@ -11,7 +11,7 @@ body {
     margin: 1em auto;
 }
 .grid_block {
-    /*display: grid;*/
+    display: grid;
 }
 .grid_block.vertical {
     grid-template-rows: max-content 200px 1fr;
@@ -23,7 +23,7 @@ body {
 }
 .grid_block.horizontal .card {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr 1fr 1fr;
     /*min-height: 90%;*/
     padding: 10px;
     /*border: 1px solid red;*/
