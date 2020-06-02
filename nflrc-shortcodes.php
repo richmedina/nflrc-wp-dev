@@ -142,7 +142,7 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	$role_type = sanitize_text_field($a['role_type']);
 	$args = array(
 		'numberposts' 		=> 100,
-		'nflrc_staff'	=> true,
+		'nflrc_staff'		=> True,
 	    'post_type'      	=> array('contact'),
 	);
 	$posts = new WP_Query($args);
