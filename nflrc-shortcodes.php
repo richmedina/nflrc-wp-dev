@@ -141,28 +141,32 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	), $atts );
 	$role_type = sanitize_text_field($a['role_type']);
 	$args = array(
-		'numberposts' 		=> -1,
+		'numberposts' 		=> 100,
 		'nflrc_role_type'	=> $role_type,
 	    'post_type'      	=> array('contact'),
 	);
 	$posts = new WP_Query($args);
 	$output = '';
+	
 	if ( $posts->have_posts() ) {
-	    global $post;
+		$output .= "<div class='grid_wrap'>";
+	    // global $post;
 	    while ( $posts->have_posts() ) {
 	    	$posts->the_post();
 	    	$data = read_nflrc_fields($post);
-	    	$output .= "<div class='grid_wrap'";
+	    	// var_dump($data);
+	    	
 	    	$output .= "<article class='grid_block {$a['cls_str']}'>";
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
 	    	$output .= "<div class='card'>";
 	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
 	    	$output .= "<div class='block_body'>{$data['excerpt']}</div>";
-	    	$output .= "<div class='block_footer'>{$data['post_type']}</div>";
+	    	$output .= "<div class='block_footer'>{$data['nflrc_role']}</div>";
 	    	$output .= "</div>";
 	    	$output .= "</article>";
-	    	$output .= "</div>";
+	    	
 	    }
+	    $output .= "</div>";
 	    // wp_reset_postdata();  
 	} else {
 	    $output .= "<div>Content not found.</div>";	}
