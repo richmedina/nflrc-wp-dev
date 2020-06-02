@@ -80,6 +80,7 @@ function nflrc_feature_list_func($atts, $content = null) {
 
 //[nflrc_project_block]
 /* Displays all post types flagged as featured ordered by featured rank.
+
 Attributes: 
 post_slug - slug of item to display in the block
 cls_str - horizontal (default) or vertical layout
@@ -122,3 +123,52 @@ function nflrc_post_block_func($atts, $content = null) {
 	
 	return $output;	
 }
+
+//[nflrc_contact_grid]
+/* Displays all contact post types filtered by shortcode param.
+
+Attributes:
+role_type - STAFF (default), ADVBOARD, COLLAB
+cls_str - horizontal or vertical (vertical) layout for each card
+
+Example: [nflrc_contact_grid role_type="STAFF"]
+*/
+add_shortcode('nflrc_contact_grid', 'nflrc_contact_grid_func');
+function nflrc_contact_grid_func($atts, $content = null) {
+	$a = shortcode_atts( array(
+		'role_type' => 'STAFF',
+		'cls_str' => 'vertical',
+	), $atts );
+	$role_type = sanitize_text_field($a['role_type']);
+	$args = array(
+		'numberposts' 		=> -1,
+		'nflrc_role_type'	=> $role_type,
+	    'post_type'      	=> array('contact'),
+	);
+	$posts = new WP_Query($args);
+	$output = '';
+	if ( $posts->have_posts() ) {
+	    global $post;
+	    while ( $posts->have_posts() ) {
+	    	$posts->the_post();
+	    	$data = read_nflrc_fields($post);
+	    	$output .= "<div class='grid_wrap'";
+	    	$output .= "<article class='grid_block {$a['cls_str']}'>";
+	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
+	    	$output .= "<div class='card'>";
+	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
+	    	$output .= "<div class='block_body'>{$data['excerpt']}</div>";
+	    	$output .= "<div class='block_footer'>{$data['post_type']}</div>";
+	    	$output .= "</div>";
+	    	$output .= "</article>";
+	    	$output .= "</div>";
+	    }
+	    // wp_reset_postdata();  
+	} else {
+	    $output .= "<div>Content not found.</div>";	}
+
+	wp_reset_postdata();
+	
+	return $output;	
+}
+
