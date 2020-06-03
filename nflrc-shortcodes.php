@@ -146,7 +146,8 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	$args = array(
 		// 'numberposts' 		=> 1000,
 		// 'order'   			=> 'DESC',
-		'meta_query'     	=> array('key'=>'nflrc_staff','compare'=>'=','value'=>true),
+		'meta_key'     	=>'nflrc_staff',
+		'meta_value'	=> 1,
 	    'post_type'      	=> 'contact',
 	    'posts_per_page' 	=> -1,
 
