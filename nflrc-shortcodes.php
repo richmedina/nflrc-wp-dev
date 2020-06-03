@@ -145,9 +145,9 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	$role_type = sanitize_text_field($a['role_type']);
 	$args = array(
 		// 'numberposts' 		=> 1000,
-		'order'   			=> 'DESC',
-		'nflrc_staff'		=> true,
-	    'post_type'      	=> array('contact'),
+		// 'order'   			=> 'DESC',
+		'meta_query'     	=> array('key'=>'nflrc_role_type','compare'=>'=','value'=>"STAFF"),
+	    'post_type'      	=> 'contact',
 	    'posts_per_page' 	=> -1,
 
 	);
@@ -165,7 +165,7 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
 	    	$output .= "<div class='card'>";
 	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
-	    	$output .= "<div class='block_body'>{$data['nflrc_staff']} | {$data['excerpt']} </div>";
+	    	$output .= "<div class='block_body'>{$data['nflrc_staff']} | {$data['nflrc_role_type']} | {$data['excerpt']} </div>";
 	    	$output .= "<div class='block_footer'>{$data['nflrc_role']}</div>";
 	    	$output .= "</div>";
 	    	$output .= "</article>";
