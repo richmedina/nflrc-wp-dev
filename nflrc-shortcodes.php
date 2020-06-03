@@ -165,7 +165,7 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
 	    	$output .= "<div class='card'>";
 	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
-	    	$output .= "<div class='block_body'> </div>";
+	    	$output .= "<div class='block_body'>{$data['nflrc_staff']} | {$data['nflrc_role_type']} | {$data['excerpt']} </div>";
 	    	$output .= "<div class='block_footer'>{$data['nflrc_role']}</div>";
 	    	$output .= "</div>";
 	    	$output .= "</article>";
