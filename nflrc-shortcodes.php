@@ -16,6 +16,7 @@ function read_nflrc_fields($post) {
 		    'post_type' => $post_type,
 		    'icon' 		=> get_the_post_thumbnail(),
 		    'link'		=> get_the_permalink(),
+		    'content'   => $post->post_content,
 		);
 
 	if($post_type === 'project') {
@@ -34,6 +35,8 @@ function read_nflrc_fields($post) {
 
 	} else if($post_type === 'contact') {
 		$fields['nflrc_role'] = $post->nflrc_role;
+		$fields['nflrc_staff'] = $post->nflrc_staff;
+		$fields['nflrc_role_type'] = $post->nflrc_role_type;
 
 	} else if($post_type === 'story') {
 
@@ -141,30 +144,32 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	), $atts );
 	$role_type = sanitize_text_field($a['role_type']);
 	$args = array(
-		'numberposts' 		=> 100,
-		'nflrc_staff'		=> True,
+		// 'numberposts' 		=> 1000,
+		'order'   			=> 'DESC',
+		'nflrc_staff'		=> 't',
 	    'post_type'      	=> array('contact'),
+	    'posts_per_page' 	=> -1,
+
 	);
 	$posts = new WP_Query($args);
 	$output = '';
 	
 	if ( $posts->have_posts() ) {
 		$output .= "<div class='grid_wrap'>";
-	    // global $post;
+	    global $post;
 	    while ( $posts->have_posts() ) {
 	    	$posts->the_post();
 	    	$data = read_nflrc_fields($post);
-	    	// var_dump($data);
 	    	
 	    	$output .= "<article class='grid_block {$a['cls_str']}'>";
 	    	$output .= "<div><a href='{$data['link']}'>{$data['icon']}</a></div>";
 	    	$output .= "<div class='card'>";
 	    	$output .= "<div class='block_title'><a href='{$data['link']}'>{$data['title']}</a></div>";
-	    	$output .= "<div class='block_body'>{$data['excerpt']}</div>";
+	    	$output .= "<div class='block_body'>{$data['nflrc_staff']} | {$data['excerpt']} </div>";
 	    	$output .= "<div class='block_footer'>{$data['nflrc_role']}</div>";
 	    	$output .= "</div>";
 	    	$output .= "</article>";
-	    	
+	    	// var_dump($data);
 	    }
 	    $output .= "</div>";
 	    // wp_reset_postdata();  
