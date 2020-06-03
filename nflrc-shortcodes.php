@@ -147,7 +147,7 @@ function nflrc_contact_grid_func($atts, $content = null) {
 		// 'numberposts' 		=> 1000,
 		// 'order'   			=> 'DESC',
 		'meta_key'     	=>'nflrc_staff',
-		'meta_value'	=> 1,
+		'meta_value'	=> 't',
 	    'post_type'      	=> 'contact',
 	    'posts_per_page' 	=> -1,
 
