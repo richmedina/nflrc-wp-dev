@@ -44,6 +44,72 @@ function read_nflrc_fields($post) {
 	return $fields;	
 }
 
+// function get_csv_terms($fname) {
+// 	$file = fopen($fname, "r");
+// 	$data = array();
+// 	// while(! feof($file)) {
+// 	//   array_push($data, fgetcsv($file));
+// 	// }
+
+// 	// fclose($file);
+// 	return $data;
+// }
+
+add_shortcode('import_csv_tags_form', 'import_csv_tags_form_func');
+function import_csv_tags_form_func($atts, $content = null) {
+  if (isset($_POST['submit'])) {
+    $csv_file = $_FILES['csv_file'];
+    $csv_to_array = array_map('str_getcsv', file($csv_file['tmp_name']));
+		
+    foreach ($csv_to_array as $key => $value) {
+    	// wp_insert_term($value[0], "post_tag");
+    }
+  } else {
+    echo '<form action="" method="post" enctype="multipart/form-data">';
+    echo '<input type="file" name="csv_file">';
+    echo '<input type="submit" name="submit" value="submit">';
+    echo '</form>';
+  }
+}
+
+
+add_shortcode('import_csv_tag_mapping_form', 'import_csv_tag_mapping_form_func');
+function import_csv_tag_mapping_form_func($atts, $content = null) {
+  if (isset($_POST['submit'])) {
+    $csv_file = $_FILES['csv_file'];
+    $csv_to_array = array_map('str_getcsv', file($csv_file['tmp_name']));
+	$output = "";
+	$count = 0;
+    foreach ($csv_to_array as $key => $value) {
+    	// var_dump($value);
+    	//  [0]=> string(7) "project" [1]=> string(2) "48" [2]=> string(10) "assessment" 
+		$args = array(
+			'numberposts' 		=> 1,
+			'meta_key'       	=> 'postgres_pk',
+			'meta_value'		=> $value[1],
+		    'post_type'      	=> $value[0]
+		);
+		$posts = new WP_Query($args);
+
+		if ( $posts->have_posts() ) {
+			$count += 1;
+			global $post;
+		    // var_dump("post");
+		    	$posts->the_post();
+		        $output .= "<div>{$value[0]} {$value[1]} {$value[2]} {$post->post_title}</div>";
+		}
+		wp_reset_postdata();
+	}
+	$output .= $count;
+	return $output;
+  } else {
+    echo '<form action="" method="post" enctype="multipart/form-data">';
+    echo '<input type="file" name="csv_file">';
+    echo '<input type="submit" name="submit" value="submit">';
+    echo '</form>';
+  }
+}
+
 // [nflrc_feature_list]
 /* Displays all post types flagged as featured ordered by featured rank.
 */
