@@ -65,6 +65,7 @@ function import_csv_tags_form_func($atts, $content = null) {
     	// wp_insert_term($value[0], "post_tag");
     }
   } else {
+  	echo '<h2>Import terms from django site:</h2>';
     echo '<form action="" method="post" enctype="multipart/form-data">';
     echo '<input type="file" name="csv_file">';
     echo '<input type="submit" name="submit" value="submit">';
@@ -103,6 +104,7 @@ function import_csv_tag_mapping_form_func($atts, $content = null) {
 	$output .= $count;
 	return $output;
   } else {
+  	echo '<h2>Import object/term relations from django site:</h2>';
     echo '<form action="" method="post" enctype="multipart/form-data">';
     echo '<input type="file" name="csv_file">';
     echo '<input type="submit" name="submit" value="submit">';
