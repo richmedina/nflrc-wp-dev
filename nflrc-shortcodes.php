@@ -62,7 +62,7 @@ function import_csv_tags_form_func($atts, $content = null) {
     $csv_to_array = array_map('str_getcsv', file($csv_file['tmp_name']));
 		
     foreach ($csv_to_array as $key => $value) {
-    	// wp_insert_term($value[0], "post_tag");
+    	wp_insert_term($value[0], "post_tag");
     }
   } else {
   	echo '<h2>Import terms from django site:</h2>';
