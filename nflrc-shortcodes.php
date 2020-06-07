@@ -95,9 +95,9 @@ function import_csv_tag_mapping_form_func($atts, $content = null) {
 		if ( $posts->have_posts() ) {
 			$count += 1;
 			global $post;
-		    // var_dump("post");
-		    	$posts->the_post();
-		        $output .= "<div>{$value[0]} {$value[1]} {$value[2]} {$post->post_title}</div>";
+		    $posts->the_post();
+		    wp_add_post_tags($post->ID, $value[2]);
+		    $output .= "<div>{$post->ID} {$value[0]} {$value[1]} {$value[2]} {$post->post_title}</div>";
 		}
 		wp_reset_postdata();
 	}
