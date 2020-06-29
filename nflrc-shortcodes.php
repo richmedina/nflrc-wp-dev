@@ -250,3 +250,41 @@ function nflrc_contact_grid_func($atts, $content = null) {
 	return $output;	
 }
 
+add_shortcode('nflrc_debug', 'nflrc_debug_func');
+function nflrc_debug_func() {
+		$args = array(
+		    'post_type'      	=> array( 'contact' ),
+		    'orderby'			=> 'ID',
+		    'order'   			=> 'ASC',
+		    'posts_per_page' 	=> -1,			
+		);
+		$the_query = new WP_Query( $args );
+		$output = array();
+		$debugstr = "";
+		if ( $the_query->have_posts() ) {
+			global $post;
+		    while ( $the_query->have_posts() ) {
+		        $the_query->the_post();
+		        $title = $post->post_title;
+		        $p_id = strval($post->ID);
+		        $output[$p_id] = $title;
+		        $is_staff = $post->nflrc_staff;
+		        $debugstr .= "<div>{$title} | {$p_id} | {$is_staff}</div>;
+		        /*$debugstr .= "<article class='grid_block'>";
+				$debugstr .= "<div>{}</div>";
+				$debugstr .= "<div class='card'>";
+				$debugstr .= "<div class='block_title'>{}</div>";
+				$debugstr .= "<div class='block_body'>{}</div>";
+				$debugstr .= "<div class='block_footer'>{}</div>";
+				$debugstr .= "</div>";
+				$debugstr .= "</article>";*/
+		    }
+		    wp_reset_postdata();    
+		} else {
+			$output = array(); 
+		}
+		// var_dump($output);
+		return debugstr;
+}
+
+
