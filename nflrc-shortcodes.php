@@ -270,6 +270,7 @@ function nflrc_debug_func() {
 		        $output[$p_id] = $title;
 		        $is_staff = $post->nflrc_staff;
 		        $debugstr .= "<div>{$title} | {$p_id} | {$is_staff}</div>";
+		        var_dump($post);
 		        /*$debugstr .= "<article class='grid_block'>";
 				$debugstr .= "<div>{}</div>";
 				$debugstr .= "<div class='card'>";
@@ -284,7 +285,7 @@ function nflrc_debug_func() {
 			$output = array(); 
 		}
 		// var_dump($output);
-		return debugstr;
+		return $debugstr;
 }
 
 
