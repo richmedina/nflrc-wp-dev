@@ -268,7 +268,7 @@ function nflrc_debug_func() {
 		        $title = $post->post_title;
 		        $p_id = strval($post->ID);
 		        $output[$p_id] = $title;
-		        update_post_meta( $p_id, 'nflrc_staff', false );
+		        // update_post_meta( $p_id, 'nflrc_staff', false );
 		        // $post->nflrc_staff = false;
 		        $is_staff = $post->nflrc_staff;
 
