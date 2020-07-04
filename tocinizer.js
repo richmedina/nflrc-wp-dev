@@ -1,5 +1,5 @@
 window.onload = function() {
-    var sections = document.querySelectorAll('div.et_pb_post_content_0_tb_body > h2');
+    var sections = document.querySelectorAll('.nflrc_divi_post_content > h2');
     var toc = document.querySelector('#toc');
     for (let i = 0; i < sections.length; i++) {
         var s = sections[i];
@@ -17,7 +17,7 @@ window.onload = function() {
             e.preventDefault();
 
             section = document.querySelector(e.target.getAttribute('data-starget'));
-            section.parentElement.style.height = '200%';
+            // section.parentElement.style.height = '200%';
             section.scrollIntoView({behavior: 'smooth'});
             document.querySelectorAll('.active').forEach(function(element) {
                 element.classList.remove('active');
