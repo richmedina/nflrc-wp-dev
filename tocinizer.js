@@ -2,13 +2,7 @@ window.onload = function() {
     var sections = document.querySelectorAll('.nflrc_divi_post_content > h2');
     var toc = document.querySelector('#toc');
     var menuitem = document.createElement('li');
-    var anchor = document.createElement('a');
-    anchor.href = '#';
-    anchor.setAttribute('data-starget', '#');
-    anchor.textContent = 'Top';
-    anchor.classList.add('tocbtn');
-    menuitem.append(anchor);
-    toc.append(menuitem);    
+    var anchor = document.createElement('a');   
     for (let i = 0; i < sections.length; i++) {
         var s = sections[i];
         menuitem = document.createElement('li');
@@ -23,15 +17,16 @@ window.onload = function() {
 
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-
-            section = document.querySelector(e.target.getAttribute('data-starget'));
-            // section.parentElement.style.height = '200%';
-            section.scrollIntoView({behavior: 'smooth'});
             document.querySelectorAll('.active').forEach(function(element) {
                 element.classList.remove('active');
             });
-            section.classList.add('active');
-            e.target.classList.add('active');
+            section = document.querySelector(e.target.getAttribute('data-starget'));
+            // section.parentElement.style.height = '200%';
+            if (section) {
+                section.scrollIntoView({behavior: 'smooth'});                
+                section.classList.add('active');
+                e.target.classList.add('active');
+            }
         });        
     }
 };
