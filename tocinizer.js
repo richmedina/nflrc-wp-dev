@@ -24,7 +24,8 @@ window.onload = function() {
             
             // section.parentElement.style.height = '200%';
             if (section !== null) {
-                section.scrollIntoView({behavior: 'smooth'});                
+                section.scrollIntoView({behavior: 'smooth'}); 
+                toc.scrollIntoView();               
                 section.classList.add('active');
                 e.target.classList.add('active');
             }
