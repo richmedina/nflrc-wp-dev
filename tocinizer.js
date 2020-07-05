@@ -23,12 +23,9 @@ window.onload = function() {
             });
             
             // section.parentElement.style.height = '200%';
-            if (section !== null) {
-                section.scrollIntoView({behavior: 'smooth'}); 
-                toc.scrollIntoView();               
-                section.classList.add('active');
-                e.target.classList.add('active');
-            }
+            section.scroll(0, 0); 
+            section.classList.add('active');
+            e.target.classList.add('active');
         });        
     }
     document.querySelector('#menutop').addEventListener('click', function(e) {
