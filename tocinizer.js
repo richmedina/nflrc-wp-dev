@@ -17,12 +17,13 @@ window.onload = function() {
 
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
+            section = document.querySelector(e.target.getAttribute('data-starget'));
             document.querySelectorAll('.active').forEach(function(element) {
                 element.classList.remove('active');
             });
-            section = document.querySelector(e.target.getAttribute('data-starget'));
+            
             // section.parentElement.style.height = '200%';
-            if (section) {
+            if (section !== null) {
                 section.scrollIntoView({behavior: 'smooth'});                
                 section.classList.add('active');
                 e.target.classList.add('active');
