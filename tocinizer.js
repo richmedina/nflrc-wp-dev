@@ -23,7 +23,7 @@ window.onload = function() {
             });
             
             // section.parentElement.style.height = '200%';
-            section.scroll(0, 0); 
+            section.scrollIntoView(); 
             section.classList.add('active');
             e.target.classList.add('active');
         });        
