@@ -30,6 +30,12 @@ window.onload = function() {
             }
         });        
     }
+    document.querySelector('#menutop').addEventListener('click', function(e) {
+        document.querySelectorAll('.active').forEach(function(element) {
+            element.classList.remove('active');
+        });  
+    });
+
 };
 
 
