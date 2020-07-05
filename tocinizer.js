@@ -26,7 +26,7 @@ window.onload = function() {
             section.scrollIntoView(); 
             section.classList.add('active');
             e.target.classList.add('active');
-            document.querySelector('#left').scrollIntoView(false);
+            // e.target.scrollIntoView();
 
         });        
     }
